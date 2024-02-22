@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Validation</title>
+    <style>
+        body{
+            background-color: lightgreen;
+            text-decoration: solid;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" oninput="validatePassword()" required>
+    <p id="passwordError" style="color: red;"></p>
+
+    <script>
+        function isValidPassword(password) {
+            // Password should be at least 8 characters long and contain a mix of uppercase, lowercase letters, and at least one digit
+            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            return passwordRegex.test(password);
+        }
+
+        function validatePassword() {
+            var passwordInput = document.getElementById('password');
+            var passwordError = document.getElementById('passwordError');
+
+            // Get the password value
+            var password = passwordInput.value;
+
+            // Check if the password is in the given format
+            if (isValidPassword(password)) {
+                passwordError.textContent = ''; // Clear error message if valid
+            } else {
+                passwordError.textContent = 'Invalid password format. Password must be at least 8 characters long and contain a mix of uppercase and lowercase letters, and at least one digit.';
+            }
+        }
+    </script>
+
+</body>
+</html>

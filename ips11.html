@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form with Text Area, Name, Age, Range, and Checkboxes</title>
+  <style>
+    body{
+        background-color: lightcoral;
+
+    }
+    hr{
+        width: fit-content;
+        color: black;
+    }
+
+  </style>
+</head>
+<body>
+    <form id="myForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <br>
+        
+        <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required>
+    <br>
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" min="18" required>
+    <br>
+    <button type="submit">Submit</button>
+    <fieldset>
+        <legend>Interests:</legend>
+        <label for="interest1"><input type="checkbox" id="interest1" name="interests[]" value="music"> Music</label>
+        <br>
+        <label for="interest2"><input type="checkbox" id="interest2" name="interests[]" value="movies"> Movies</label>
+        <br>
+        <label for="interest3"><input type="checkbox" id="interest3" name="interests[]" value="sports"> Sports</label>
+        <br>
+        <label for="interest4"><input type="checkbox" id="interest4" name="interests[]" value="technology"> Technology</label>
+      </fieldset>
+      <br>
+  
+      <fieldset>
+        <legend>Gender:</legend>
+        <label for="genderM"><input type="radio" id="genderM" name="gender" value="male"> Male</label>
+        <br>
+        <label for="genderF"><input type="radio" id="genderF" name="gender" value="female"> Female</label>
+        <br>
+        <label for="genderO"><input type="radio" id="genderO" name="gender" value="other"> Other</label>
+      </fieldset>
+      <br>
+      <p> for password settings</p>
+      <br>
+      <a href="hfuwfuw.html" >click me </a><br><hr>
+      <p>upload your photo here</p><input type="file">
+      
+      <button type="submit">Submit</button>
+      <p id="message"></p>
+      
+    
+      </form>
+    
+      
+      
+  <script>
+    const form = document.getElementById('myForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const age = parseInt(document.getElementById('age').value);
+
+      // Basic validation
+      let isValid = true;
+
+      // Email validation
+      if (!validateEmail(email)) {
+        message.textContent = "Please enter a valid email address.";
+        isValid = false;
+        return;
+      }
+
+      // Phone number validation (replace with your specific format requirements)
+      if (!validatePhoneNumber(phone)) {
+        message.textContent = "Please enter a valid phone number.";
+        isValid = false;
+        return;
+      }
+
+      // Age validation as before
+      if (age < 18 || age > 120) {
+        message.textContent = "Please enter a valid age between 18 and 120.";
+        isValid = false;
+        return;
+      }
+
+      // Generate hello message if everything is valid
+      if (isValid) {
+        let greeting;
+        if (age < 30) {
+          greeting = "Hey there, young one!";
+        } else if (age < 60) {
+          greeting = `Hello, ${firstName}! Welcome to the middle ground.`;
+        } else {
+          greeting = `Welcome, ${firstName}! Enjoying the wisdom of your years?`;
+        }
+        message.textContent = `${greeting} `;
+      }
+    });
+
+    // Email validation function
+    function validateEmail(email) {
+      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return regex.test(email);
+    }
+
+    // Phone number validation function (replace with your format requirements)
+    function validatePhoneNumber(phone) {
+      // Replace with a regular expression that matches your desired phone number format
+      const regex = /^\d{10}$/; // Example for 10-digit US numbers
+      return regex.test(phone);
+    }
+    
+    
+    
+  </script>
+  <img src="rabbit.jpg">
+</body>
+</html>
